@@ -9,9 +9,10 @@ const recipes = [
 ];
 
 app.get('/recipes/search', (req, res) => {
-  const { name } = req.query;
-  const filteredRecipes = recipes.filter((recipeName) =>
-    recipeName.name.includes(name)
+  const { name, maxPrice } = req.query;
+  const filteredRecipes = recipes.filter(
+    (recipeName) =>
+      recipeName.name.includes(name) && recipeName.price < parseInt(maxPrice)
   );
   res.status(200).json(filteredRecipes);
 });
