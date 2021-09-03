@@ -12,9 +12,9 @@ app.get('/recipes/search', (req, res) => {
   const { name, maxPrice, minPrice } = req.query;
   const filteredRecipes = recipes.filter(
     (recipeName) =>
-      recipeName.name.includes(name) &&
-      recipeName.price <= parseInt(minPrice) &&
-      recipeName.price > parseInt(maxPrice)
+      recipeName.name.includes(name) ||
+      recipeName.price >= parseInt(minPrice) ||
+      recipeName.price < parseInt(maxPrice)
   );
   res.status(200).json(filteredRecipes);
 });
