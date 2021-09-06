@@ -38,6 +38,7 @@ app.post('/recipes', (req, res) => {
 });
 
 
+
 app.put('/recipes/:id', (req, res) => {
   const { id } = req.params;
   const { name, price } = req.body;
@@ -64,6 +65,12 @@ app.delete('/recipes/:id', function (req, res) {
 
 app.all('*', function (req, res) {
   return res.status(404).json({ message: `Rota '${req.path}' não existe!` });
+
+app.post('/drinks', (req, res) => {
+  const { id, name, price } = req.body;
+  drinks.push({ id, name, price });
+  res.status(200).json({ message: `Drink created successfully!` });
+
 });
 
 app.listen(3001, () => {
