@@ -20,6 +20,12 @@ app.get('/drinks/:id', (req, res) => {
   res.status(200).json(drink);
 });
 
+app.post('/drinks', (req, res) => {
+  const { id, name, price } = req.body;
+  drinks.push({ id, name, price });
+  res.status(200).json({ message: `Drink created successfully!` });
+});
+
 app.listen(3001, () => {
   console.log('Server Online');
 });
