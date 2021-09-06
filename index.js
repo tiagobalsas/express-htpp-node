@@ -8,6 +8,8 @@ const recipes = [
   { id: 3, name: 'Macarrão com molho branco', price: 35.0, waitTime: 25 },
 ];
 
+
+
 app.get('/recipes/search', (req, res) => {
   const { name, maxPrice, minPrice } = req.query;
   const filteredRecipes = recipes.filter(
@@ -18,6 +20,7 @@ app.get('/recipes/search', (req, res) => {
   );
   res.status(200).json(filteredRecipes);
 });
+
 
 app.get('/recipes/:id', function (req, res) {
   const { id } = req.params;
