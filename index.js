@@ -10,8 +10,6 @@ const recipes = [
   { id: 3, name: 'Macarrão com molho branco', price: 35.0, waitTime: 25 },
 ];
 
-
-
 app.get('/recipes/search', (req, res) => {
   const { name, maxPrice, minPrice } = req.query;
   const filteredRecipes = recipes.filter(
@@ -22,7 +20,6 @@ app.get('/recipes/search', (req, res) => {
   );
   res.status(200).json(filteredRecipes);
 });
-
 
 app.get('/recipes/:id', function (req, res) {
   const { id } = req.params;
@@ -40,17 +37,17 @@ app.post('/recipes', (req, res) => {
   res.status(201).json({ message: 'Recipe created successfully!' });
 });
 
-fetch(`http://localhost:3001/recipes/`, {
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    id: 4,
-    title: 'Macarrão com Frango',
-    price: 30,
-  }),
+app.put('/recipes/:id', (req, res) => {
+  const { id } = req.params;
+  const { name, price } = req.body;
+  const recipeIndex = recipes.findIndex((rec) => rec.id === parseInt(id));
+
+  if (recipeIndex === -1)
+    return res.status(404).json({ message: 'Recipe not found!' });
+
+  recipes[recipeIndex] = { ...recipes[recipeIndex], name, price };
+
+  res.status(204).end();
 });
 
 app.listen(3001, () => {
