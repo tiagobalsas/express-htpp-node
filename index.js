@@ -40,6 +40,12 @@ app.post('/recipes', (req, res) => {
   res.status(201).json({ message: 'Recipe created successfully!' });
 });
 
+app.post('/drinks', (req, res) => {
+  const { id, name, price } = req.body;
+  drinks.push({ id, name, price });
+  res.status(200).json({ message: `Drink created successfully!` });
+});
+
 app.listen(3001, () => {
   console.log('Server Online');
 });
